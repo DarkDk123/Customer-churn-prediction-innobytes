@@ -72,8 +72,10 @@ def process_uploaded_csv(uploaded_file):
 st.title("Customer Churn Prediction 🤖")
 st.text("Use the input form below or upload a CSV file for predictions..")
 
-# Sidebar 
-st.sidebar.image("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fraw.githubusercontent.com%2Famansingh9097%2Famansingh9097.github.io%2Fmaster%2Fassets%2Fimg%2Fuploads%2Fchurn-prediction%2Fcustomer-churn.jpg&f=1&nofb=1&ipt=499af1f89224da5be15093906abdbc6cd2fddf4830d7ff2ec4d9048516048048&ipo=images")
+# Sidebar
+st.sidebar.image(
+    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fraw.githubusercontent.com%2Famansingh9097%2Famansingh9097.github.io%2Fmaster%2Fassets%2Fimg%2Fuploads%2Fchurn-prediction%2Fcustomer-churn.jpg&f=1&nofb=1&ipt=499af1f89224da5be15093906abdbc6cd2fddf4830d7ff2ec4d9048516048048&ipo=images"
+)
 
 # Option for individual input form or CSV upload
 st.sidebar.title("Select Input Method")
@@ -84,11 +86,11 @@ st.sidebar.write("---")
 st.sidebar.subheader("Required Data Schema...")
 # Expander to display input schema
 with st.sidebar.expander("Input Data Schema"):
-    st.write(
-        pd.DataFrame.from_dict(
-            ColumnTypeMapping, orient="index", columns=["Data Type", "Allowed Values"]
-        )
+    df = pd.DataFrame.from_dict(
+        ColumnTypeMapping, orient="index", columns=["Data Type", "Allowed Values"]
     )
+    df["Data Type"] = df["Data Type"].apply(lambda x: x.__name__)
+    st.write(df)
 
 if option == "Form Input":
     # Display the form for individual input
