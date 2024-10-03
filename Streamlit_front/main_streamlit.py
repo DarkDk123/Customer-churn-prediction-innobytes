@@ -4,7 +4,7 @@ import joblib  # For loading the trained classification model
 from serial_required import drop_missing_convert_dt
 
 # Load your trained model
-MODEL_PATH = "./Churn_predictor_pipeline_joblib"
+MODEL_PATH = "../Churn_predictor_pipeline_joblib"
 model = joblib.load(MODEL_PATH)
 
 # Define the column to data type mapping
@@ -102,6 +102,7 @@ if option == "Form Input":
         st.success(
             f"Prediction: {'Churn! ✅' if prediction[0] == 1 else 'No Churn! ❌'}"
         )
+        st.write(model.predict_proba(input_df))
 
 elif option == "Upload CSV":
     st.header("Upload a CSV file for batch prediction")
