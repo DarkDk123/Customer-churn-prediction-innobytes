@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib  # For loading the trained classification model
 from serial_required import drop_missing_convert_dt
+import plotly.express as px
 
 # Load your trained model
 MODEL_PATH = "../Churn_predictor_pipeline_joblib"
@@ -98,11 +99,22 @@ if option == "Form Input":
     input_df = process_user_input()
 
     if st.button("Predict"):
-        prediction = model.predict(input_df)
+        prediction = model.predict_proba(input_df)
         st.success(
-            f"Prediction: {'Churn! ✅' if prediction[0] == 1 else 'No Churn! ❌'}"
+            f"Prediction: {'Churn! ✅' if prediction[0][1] >= 0.5 else 'No Churn! ❌'}"
         )
-        st.write(model.predict_proba(input_df))
+
+        st.plotly_chart(
+            px.pie(
+                values=prediction[0],
+                names=["No Churn", "Churn"],
+                color=["No Churn", "Churn"],
+                hole=0.3,
+                title="Churn Probability",
+                hover_name=["No Churn", "Churn"],
+                
+            ),
+        )
 
 elif option == "Upload CSV":
     st.header("Upload a CSV file for batch prediction")
