@@ -18,7 +18,7 @@ A Classification model that predicts whether a customer will churn or not.
 
 ## Predicting Customer Churn using Machine Learning
 
-<center> <img src="Streamlit_front/images/single_prediction.png" width=50%> </center><br><br>
+<center> <img src="Streamlit_front/images/single_prediction.png"> </center><br><br>
 
 This project builds a machine learning model capable of predicting whether a customer will **churn (leave)** based on their characteristics. The data comes from a *Telco customer churn* dataset.
 
