@@ -5,7 +5,7 @@ from serial_required import drop_missing_convert_dt
 import plotly.express as px
 
 # Load your trained model
-MODEL_PATH = "../Churn_predictor_pipeline_joblib"
+MODEL_PATH = "./Churn_predictor_pipeline_joblib"
 model = joblib.load(MODEL_PATH)
 
 # Define the column to data type mapping
